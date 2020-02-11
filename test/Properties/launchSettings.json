@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "test": {
+      "commandName": "Executable",
+      "executablePath": "D:\\цфт\\test\\test\\bin\\Release\\netcoreapp3.0\\test.exe",
+      "commandLineArgs": "-i -a out.txt 1.txt 2.txt"
+    }
+  }
+}
