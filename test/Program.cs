@@ -15,7 +15,7 @@ namespace test
 
             while (!sr.EndOfStream)
             {
-                line = sr.ReadLine();               
+                line = sr.ReadLine();
                 file.Add(line);
             }
             sr.Close();
@@ -23,11 +23,11 @@ namespace test
             return mas;
         }
         static int[] readfileINT(string path)
-        {          
-             
+        {
+
             StreamReader sr = new StreamReader(path);
             string line;
-            List<int> file = new List<int>() ;
+            List<int> file = new List<int>();
 
             while (!sr.EndOfStream)
             {
@@ -37,15 +37,15 @@ namespace test
             }
             sr.Close();
             int[] mas = file.ToArray();
-            return mas;    
+            return mas;
         }
-        static string[] mergeString(string path1, string path2,bool sort)//sort == true сортировка по возрастанию, false-наоборот
+        static string[] mergeString(string path1, string path2, bool sort)//sort == true сортировка по возрастанию, false-наоборот
         {
-            string[] m1 = readfileString(path1);           
+            string[] m1 = readfileString(path1);
             string[] m2 = readfileString(path2);
             string[] m3 = new string[m1.Length + m2.Length];
 
-            if(sort==false)
+            if (sort == false)
             {
                 Array.Reverse(m1);
                 Array.Reverse(m2);
@@ -63,7 +63,7 @@ namespace test
                 if (result > 0)
                 {
                     m3[k] = y;
-                    j++;                 
+                    j++;
                 }
                 else if (result < 0)
                 {
@@ -87,7 +87,7 @@ namespace test
             }
             else return m3;
         }
-        static int[] mergeINT(string path1, string path2,bool sort)
+        static int[] mergeINT(string path1, string path2, bool sort)
         {
             int[] m1 = readfileINT(path1);
             int[] m2 = readfileINT(path2);
@@ -104,26 +104,26 @@ namespace test
             {
                 int x = m1[i];
                 int y = m2[j];
-               
+
                 if (x >= y)
                 {
                     m3[k] = y;
-                    j++;               
+                    j++;
                 }
                 else
                 {
                     m3[k] = x;
-                    i++;                   
+                    i++;
                 }
                 k++;
 
             }
-            if (j <= m2.Length-1)
+            if (j <= m2.Length - 1)
             {
                 Array.Copy(m2, j, m3, k, m3.Length - k);
             }
-            else if (i <= m1.Length-1) Array.Copy(m1, i, m3, k, m3.Length - k);
-         
+            else if (i <= m1.Length - 1) Array.Copy(m1, i, m3, k, m3.Length - k);
+
             if (sort == false)
             {
                 int[] m4 = new int[m1.Length + m2.Length - err];
@@ -135,13 +135,15 @@ namespace test
         }
         static void Main(string[] args)
         {
+            string path = @"D:\цфт\test\";//необходимо указать путь с входными файлами 
+
             try
             {
                 if ((args[0] == "-a" && args[1] == "-i") || (args[0] == "-i" && args[1] == "-a"))
                 {
-                    using (StreamWriter w = new StreamWriter(args[2], false, Encoding.Default))
+                    using (StreamWriter w = new StreamWriter(path + args[2], false, Encoding.Default))
 
-                        foreach (int a in mergeINT(args[3], args[4], true))
+                        foreach (int a in mergeINT(path + args[3], path + args[4], true))
                         {
                             w.WriteLine(a);
                             Console.WriteLine(a + "");
@@ -149,12 +151,12 @@ namespace test
                 }
                 else if ((args[0] == "-a" && args[1] == "-s") || (args[0] == "-s" && args[1] == "-a"))
                 {
-                    using (StreamWriter w = new StreamWriter(args[2], false, Encoding.Default))
+                    using (StreamWriter w = new StreamWriter(path + args[2], false, Encoding.Default))
 
-                        foreach (string a in mergeString(args[3], args[4], true))
+                        foreach (string a in mergeString(path + args[3], path + args[4], true))
                         {
                             w.WriteLine(a);
-                            Console.WriteLine(a + "");
+                            //Console.WriteLine(a + "");
                         }
                 }
 
@@ -165,7 +167,7 @@ namespace test
                         foreach (int a in mergeINT(args[3], args[4], false))
                         {
                             w.WriteLine(a);
-                            Console.WriteLine(a + "");
+                            //  Console.WriteLine(a + "");
                         }
 
                 }
@@ -176,16 +178,16 @@ namespace test
                         foreach (string a in mergeString(args[3], args[4], false))
                         {
                             w.WriteLine(a);
-                            Console.WriteLine(a + "");
+                            //Console.WriteLine(a + "");
                         }
 
                 }
                 else
                 {
-                    throw new Exception("Неверно указаны аргументы консоли");                    
+                    throw new Exception("Неверно указаны аргументы консоли");
                 }
 
-                
+
             }
             catch (System.IO.FileNotFoundException)
             {
@@ -204,3 +206,4 @@ namespace test
         }
     }
 }
+
